@@ -13,11 +13,11 @@ void Allocator::finalize() {
     this->current = nullptr;
 }
 
-bool Allocator::is_initialized() {
+bool Allocator::isInitialized() {
     return this->start == nullptr;
 }
 
-bool Allocator::can_allocate(size_t size) {
+bool Allocator::canAllocate(size_t size) {
     return (this->current - this->start) + size <= this->maxSize;
 }
 
@@ -25,14 +25,14 @@ bool Allocator::can_allocate(size_t size) {
 Allocator::Allocator(): start(nullptr), current(nullptr), maxSize(0) {}
 
 Allocator::~Allocator() {
-    if (this->is_initialized()) {
+    if (this->isInitialized()) {
         this->finalize();
     }   
 }
 
 
 void Allocator::makeAllocator(size_t maxSize) {
-    if (this->is_initialized()){
+    if (this->isInitialized()){
         this->finalize();
     }
 
@@ -40,7 +40,7 @@ void Allocator::makeAllocator(size_t maxSize) {
 }
 
 char* Allocator::alloc(size_t size) {
-    if (!this->is_initialized() or !this->can_allocate(size)) {
+    if (!this->isInitialized() or !this->canAllocate(size)) {
         return nullptr;
     }
 

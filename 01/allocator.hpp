@@ -12,8 +12,8 @@ private:
 
     void initialize(size_t maxSize);
     void finalize();
-    bool is_initialized();
-    bool can_allocate(size_t size);
+    bool isInitialized();
+    bool canAllocate(size_t size);
 
 public:
     Allocator();
