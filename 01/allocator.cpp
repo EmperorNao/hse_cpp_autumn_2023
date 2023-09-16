@@ -14,7 +14,7 @@ void Allocator::finalize() {
 }
 
 bool Allocator::isInitialized() {
-    return this->start == nullptr;
+    return this->start != nullptr;
 }
 
 bool Allocator::canAllocate(size_t size) {
