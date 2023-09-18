@@ -10,8 +10,8 @@ class TestAllocator: public ::testing::Test {
 protected:
     Allocator allocator;
 
-    void setUp() { allocator = Allocator(); }
-    void tearDown() { allocator.~Allocator(); }
+    void setUp() { }
+    void tearDown() { }
 
 };
 
