@@ -25,6 +25,11 @@ TEST_F(TestAllocator, testAllocatorAlloc) {
     ASSERT_NE(nullptr, allocator->alloc(10));
 }
 
+TEST_F(TestAllocator, testAllocatorAllocZero) {
+    allocator->makeAllocator(10);
+    ASSERT_EQ(nullptr, allocator->alloc(0));
+}
+
 TEST_F(TestAllocator, testAllocatorAllocBig) {
     unsigned long bigNumber = std::numeric_limits<int>::max();
     allocator->makeAllocator(bigNumber + 1);

@@ -18,7 +18,7 @@ bool Allocator::isInitialized() {
 }
 
 bool Allocator::canAllocate(size_t size) {
-    return (this->current - this->start) + size <= this->maxSize;
+    return size != 0 and ((this->current - this->start) + size <= this->maxSize);
 }
 
 
