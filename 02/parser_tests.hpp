@@ -96,6 +96,20 @@ TEST_F(TestParser, testDigitTokenCallbackParser) {
     ASSERT_EQ(1, uint64Map[123]);
 }
 
+TEST_F(TestParser, testSignedFloatDigitTokenCallbackParser) {
+
+    parser->setStringTokenCallback(this->stringCallback);
+    parser->setDigitTokenCallback(this->digitCallback);
+
+    parser->parse("+1 -1 +0 -0 0 2.0");
+
+    auto kv = std::views::keys(uint64Map);
+    std::vector<uint64_t> keys{ kv.begin(), kv.end()};
+
+    ASSERT_EQ(1, keys.size());
+    ASSERT_EQ(1, uint64Map[0]);
+}
+
 TEST_F(TestParser, testMaxUint64DigitTokenCallbackParser) {
 
     parser->setStringTokenCallback(this->stringCallback);
