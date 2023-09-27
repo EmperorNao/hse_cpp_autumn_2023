@@ -28,11 +28,11 @@ protected:
         uint64Map.clear();
 
         stringCallback = [&strMap = strMap](std::string_view& s){ 
-            auto copy_of_string = std::string{s};
-            if (!strMap.contains(copy_of_string)) {
-                strMap[copy_of_string] = 0;
+            auto copyOfString = std::string{s};
+            if (!strMap.contains(copyOfString)) {
+                strMap[copyOfString] = 0;
             }
-            strMap[copy_of_string] += 1;
+            strMap[copyOfString] += 1;
         };
 
         digitCallback = [&uint64Map = uint64Map](uint64_t number){ 
@@ -115,13 +115,12 @@ TEST_F(TestParser, testMaxUint64DigitTokenCallbackParser) {
     parser->setStringTokenCallback(this->stringCallback);
     parser->setDigitTokenCallback(this->digitCallback);
 
-    auto max_uint64 = std::numeric_limits<uint64_t>::max();
-    auto str_max_uint64 = std::to_string(max_uint64);
-    auto overflow_str = str_max_uint64 + "1";
+    auto maxUint64 = std::numeric_limits<uint64_t>::max();
+    auto strMaxUint64 = std::to_string(maxUint64);
 
-    parser->parse(str_max_uint64);
-    ASSERT_EQ(0, strMap[str_max_uint64]);
-    ASSERT_EQ(1, uint64Map[max_uint64]);
+    parser->parse(strMaxUint64);
+    ASSERT_EQ(0, strMap[strMaxUint64]);
+    ASSERT_EQ(1, uint64Map[maxUint64]);
 }
 
 TEST_F(TestParser, testOverflowDigitTokenCallbackParser) {
@@ -129,15 +128,15 @@ TEST_F(TestParser, testOverflowDigitTokenCallbackParser) {
     parser->setStringTokenCallback(this->stringCallback);
     parser->setDigitTokenCallback(this->digitCallback);
 
-    auto max_uint64 = std::numeric_limits<uint64_t>::max();
-    auto str_max_uint64 = std::to_string(max_uint64);
-    auto overflow_str = str_max_uint64 + "1";
+    auto maxUint64 = std::numeric_limits<uint64_t>::max();
+    auto strMaxUint64 = std::to_string(maxUint64);
+    auto strOverflow = strMaxUint64 + "1";
 
-    parser->parse(overflow_str);
+    parser->parse(strOverflow);
     auto kv = std::views::keys(uint64Map);
     std::vector<uint64_t> keys{ kv.begin(), kv.end()};
 
-    ASSERT_EQ(1, strMap[overflow_str]);
+    ASSERT_EQ(1, strMap[strOverflow]);
     ASSERT_EQ(0, keys.size());
 
 }
