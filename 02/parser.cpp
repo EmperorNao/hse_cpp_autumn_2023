@@ -61,7 +61,7 @@ std::vector<std::string_view> TokenParser::splitString(const std::string& str) {
         }
 
         startIndex = currentIndex;
-        while (currentIndex != view.size() and !isDelimiter(view[currentIndex])) {
+        while (currentIndex != view.size() and !TokenParser::isDelimiter(view[currentIndex])) {
             currentIndex += 1;
         }
         auto source_token = view.substr(startIndex, currentIndex - startIndex);
