@@ -107,7 +107,7 @@ std::ostream& operator<<(std::ostream& os, const Matrix& matrix) {
     for (size_t rowIdx = 0; rowIdx < matrix.nRows; ++rowIdx) {
         for (size_t colIdx = 0; colIdx < matrix.nColumns; ++colIdx) {
             os << matrix.data[rowIdx * matrix.nColumns + colIdx] << " ";
-        }    
+        }
         os << std::endl;
     }
     return os;
